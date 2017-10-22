@@ -1,0 +1,48 @@
+#Python Code for Finding Next Palindrome of A given Number
+
+def incre(ar):
+    l=(len(ar)-1)//2
+    if ar[l]=='9':
+        while ar[l]=='9':
+            ar[l]='0'
+            l-=1
+            if l<0:
+                l=0
+                ar.append('1')
+                ar[len(ar)//2]='0'
+                break
+        ar[l]=str(int(ar[l])+1)
+    else:ar[l]=str(int(ar[l])+1)
+    return palin(ar)
+def palin(ar):
+    l=(len(ar)-1)//2
+    for i in range(l+1,len(ar)):
+        ar[i]=ar[len(ar)-i-1]   
+    return ar           
+t=int(input())
+for i in range(0,t):
+    k=input()
+    k=list(k)
+    l=(len(k)-1)//2
+    if l==0:
+        if len(k)==1:print(''.join(incre(k)))
+        elif k[l+1]>=k[l]:print(''.join(incre(k)))
+        else:print(''.join(palin(k)))
+    elif k[len(k)-1-l]==k[l]:
+            l+=1
+            while l!=len(k):
+                if k[l]>k[len(k)-1-l]:
+                    print(''.join(incre(k)))
+                    break
+                if k[l]<k[len(k)-1-l]:
+                    print(''.join(palin(k)))
+                    break
+                l+=1
+            if l==len(k):print(''.join(incre(k)))   
+    elif k[len(k)-1-l]>=k[l]:print(''.join(incre(k)))          
+    else:print(''.join(palin(k)))    
+    
+    
+    
+    
+    
